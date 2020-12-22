@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-21 10:00:20
- * @LastEditTime: 2020-12-21 16:52:54
+ * @LastEditTime: 2020-12-22 16:18:24
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \testfront\src\views\Login.vue
@@ -28,7 +28,8 @@
 </template>
 
 <script>
-import md5 from 'crypto-js/md5'
+import md5 from 'crypto-js/md5';
+
 export default {
   name: 'Login',
   data() {
@@ -41,13 +42,13 @@ export default {
   },
   methods: {
     login() {
-      var opt = {
+      const opt = {
         userName: this.loginForm.userName,
         pwd: md5(this.loginForm.pwd).toString(),
-      }
+      };
       this.$axios({
         method: 'post',
-        url: 'http://localhost:8082/login',
+        url: '/login',
         headers: { 'content-type': 'application/json; charset=utf-8' },
         data: JSON.stringify(opt),
       }).then((res) => {

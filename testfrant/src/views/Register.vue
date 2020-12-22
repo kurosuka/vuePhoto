@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-21 13:31:08
- * @LastEditTime: 2020-12-21 16:26:52
+ * @LastEditTime: 2020-12-22 15:21:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \testfront\src\views\Register.vue
@@ -28,7 +28,8 @@
 </template>
 
 <script>
-import md5 from 'crypto-js/md5'
+import md5 from 'crypto-js/md5';
+
 export default {
   name: 'Register',
   data() {
@@ -42,10 +43,10 @@ export default {
   },
   methods: {
     sign() {
-      var opt = {
+      const opt = {
         userName: this.registerForm.userName,
         pwd: md5(this.registerForm.pwd).toString(),
-      }
+      };
       this.$axios({
         method: 'post',
         url: 'http://localhost:8082/login/register',
@@ -53,21 +54,21 @@ export default {
         data: JSON.stringify(opt),
       }).then((res) => {
         console.log(res);
-        if(res.data.code == 200) {
+        if (res.data.code === 200) {
           this.$message({
             type: 'success',
-            message: res.data.msg
+            message: res.data.msg,
           });
-          setTimeout(()=> {
+          setTimeout(() => {
             this.$router.push({
-              name: 'Login'
-            })
+              name: 'Login',
+            });
           }, 1000);
         } else {
           this.$message({
             type: 'error',
-            message: res.data.msg
-          })
+            message: res.data.msg,
+          });
         }
       }).catch((err) => {
         console.log(err);
@@ -75,8 +76,8 @@ export default {
     },
     goLogin() {
       this.$router({
-        name: 'Login'
-      })
+        name: 'Login',
+      });
     },
   },
 };
